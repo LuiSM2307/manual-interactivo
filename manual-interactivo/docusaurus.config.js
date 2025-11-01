@@ -1,63 +1,63 @@
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Manual tecnico interactivo',
-  tagline: 'Mantenimiento Preventivo de Hardware & Correctivo de Software',
-  favicon: 'img/logo-universidad.ico',
+  title: "Manual técnico interactivo",
+  tagline: "Mantenimiento Preventivo de Hardware & Correctivo de Software",
+  favicon: "img/logo-liceo.ico",
 
   future: {
     v4: true,
   },
 
-  url: 'https://LuiSM2307.github.io',
+  url: "https://LuiSM2307.github.io",
 
-  baseUrl: '/manual-interactivo',
+  baseUrl: "/manual-interactivo",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'LuiSM2307', // Usually your GitHub org/user name.
-  projectName: 'manual-interactivo', // Usually your repo name.
+  organizationName: "LuiSM2307", // Usually your GitHub org/user name.
+  projectName: "manual-interactivo", // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: "throw",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'es',
-    locales: ['es'],
+    defaultLocale: "es",
+    locales: ["es"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: "./sidebars.js",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         blog: {
           showReadingTime: true,
           feedOptions: {
-            type: ['rss', 'atom'],
+            type: ["rss", "atom"],
             xslt: true,
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
           // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          onInlineTags: "warn",
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       }),
     ],
@@ -67,62 +67,62 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: "img/docusaurus-social-card.jpg",
       colorMode: {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'MTI - Universidad',
+        title: "MTI - Institución",
         logo: {
-          alt: 'Logo Liceo',
-          src: 'img/logo-liceo.svg',
+          alt: "Logo Liceo",
+          src: "img/logo-liceo.png",
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Manual',
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
+            position: "left",
+            label: "Manual",
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/LuiSM2307/manual-interactivo',
-            label: 'GitHub',
-            position: 'right',
+            href: "https://github.com/LuiSM2307/manual-interactivo",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Secciones del manual',
+            title: "Secciones del manual",
             items: [
               {
-                label: 'Preventivo Software',
-                to: '/docs/preventivo-software',
+                label: "Preventivo Software",
+                to: "/docs/preventivo-software",
               },
               {
-                label: 'Correctivo Software', 
-                to: '/docs/correctivo-software',
+                label: "Correctivo Software",
+                to: "/docs/correctivo-software",
               },
               {
-                label: 'Preventivo Hardware',
-                to: '/docs/preventivo-hardware',
+                label: "Preventivo Hardware",
+                to: "/docs/preventivo-hardware",
               },
             ],
           },
           {
-            title: 'Institucion',
+            title: "Institución",
             items: [
               {
-                label: 'Contacto',
-                href: 'https://x.com/docusaurus',
+                label: "Contacto",
+                href: "https://x.com/docusaurus",
               },
             ],
           },
         ],
-       copyright: `Copyright © ${new Date().getFullYear()} Manual Técnico Interactivo - U.E.N. "Vicente Emilio Sojo".`, 
+        copyright: `Copyright © ${new Date().getFullYear()} Manual Técnico Interactivo - U.E.N. "Vicente Emilio Sojo".`,
       },
       prism: {
         theme: prismThemes.github,
