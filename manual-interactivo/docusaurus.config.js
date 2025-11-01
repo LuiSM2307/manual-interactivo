@@ -10,13 +10,13 @@ const config = {
     v4: true,
   },
 
-  url: 'https://manual-interactivo.github.io',
+  url: 'https://LuiSM2307.github.io',
 
   baseUrl: '/manual-interactivo',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'LuiSM2307-github', // Usually your GitHub org/user name.
+  organizationName: 'LuiSM2307', // Usually your GitHub org/user name.
   projectName: 'manual-interactivo', // Usually your repo name.
 
   onBrokenLinks: 'throw',
