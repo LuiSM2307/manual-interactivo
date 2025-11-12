@@ -7,7 +7,7 @@ Bienvenido al manual de mantenimiento... 😊​🖐️​
 
 # ¿Qué aprenderás?📋
 
-- Conocer conceptos técnicos básicos y algunos avanzados sobre las computadoras
+- Conocer conceptos técnicos básicos y algunos avanzados sobre las computadoras.
 - Realizar mantenimientos básicos en el hardware.
 - Resolver problemas en el software y realización de mantenimientos correctivos en el sistema.
 - Detectar errores comunes con rápida solución.
@@ -22,3 +22,7 @@ Este **manual técnico interactivo** surge como una herramienta diseñada para e
 Sigue la **barra lateral** y lee cada sección, están ordenados de la forma en que aprenderás cada concepto y guía, algunas palabras estarán ***subrayadas*** para que puedas hacer clic, te llevará al glosario del manual, **¡No es un glosario cualquiera, es la mejor forma de aprender conceptos!, así que pulsa en cuanto quieras conocer un concepto
 
 ¿A qué esperas? Ve y sigue la guía de la izquierda 👈.
+
+---
+
+*Última actualización: 12-11-2025*

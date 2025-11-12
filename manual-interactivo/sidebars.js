@@ -36,6 +36,7 @@ module.exports = {
       items: [
         'mantenimiento-software/index',        // ⬅️ SIN "3-"
         'mantenimiento-software/correctivo-software', // ⬅️ SIN "3-"
+        'mantenimiento-software/herramientas-avanzadas',
       ],
     },
     {
