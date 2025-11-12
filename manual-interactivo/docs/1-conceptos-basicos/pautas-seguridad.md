@@ -1,0 +1,3 @@
+# Pautas de seguridad
+
+Contenido aquí...

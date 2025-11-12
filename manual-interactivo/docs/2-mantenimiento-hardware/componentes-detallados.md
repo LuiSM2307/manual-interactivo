@@ -1,0 +1,3 @@
+# Componentes detallados
+
+Contenido aquí...

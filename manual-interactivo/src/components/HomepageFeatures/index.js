@@ -95,7 +95,7 @@ export default function HomepageFeatures() {
               <p>Comienza a explorar nuestro manual interactivo ahora mismo</p>
               <Link
                 className="button button--primary button--lg"
-                to="/docs/introduccion">
+                to="/docs">
                 Comenzar Ahora 🚀
               </Link>
           </div>

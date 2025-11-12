@@ -1,0 +1,3 @@
+# Ejemplos de daños
+
+Contenido aquí...

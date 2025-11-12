@@ -1,0 +1,3 @@
+# Correctivo de software
+
+Contenido aquí...
