@@ -12,7 +12,7 @@ const config = {
 
   url: "https://LuiSM2307.github.io",
 
-  baseUrl: "/manual-interactivo",
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -94,16 +94,20 @@ const config = {
             title: "Secciones del manual",
             items: [
               {
-                label: "Preventivo Software",
-                to: "/docs/preventivo-software",
+                label: "Conceptos básicos",
+                to: "/docs/conceptos-basicos/",
               },
               {
-                label: "Correctivo Software",
-                to: "/docs/correctivo-software",
+                label: "Mantenimiento Hardware",
+                to: "/docs/mantenimiento-hardware/",
               },
               {
-                label: "Preventivo Hardware",
-                to: "/docs/preventivo-hardware",
+                label: "Mantenimiento Software",
+                to: "/docs/mantenimiento-software/",
+              },
+              {
+                label: "Detección de errores",
+                to: "/docs/deteccion-errores/",
               },
             ],
           },

@@ -46,7 +46,6 @@ module.exports = {
       items: [
         'deteccion-errores/index',             // ⬅️ SIN "4-"
         'deteccion-errores/problemas-frecuentes', // ⬅️ SIN "4-"
-        'deteccion-errores/casos-especificos', // ⬅️ SIN "4-"
       ],
     },
     {
@@ -57,6 +56,10 @@ module.exports = {
         'anexos/checklist-completo',
         'anexos/recursos-adicionales',
       ],
+    },
+    {
+      type: 'doc',
+      id: 'casos-especificos', 
     },
   ],
 };
