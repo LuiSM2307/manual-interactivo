@@ -14,8 +14,6 @@ const config = {
 
   baseUrl: "/",
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
   organizationName: "LuiSM2307", // Usually your GitHub org/user name.
   projectName: "manual-interactivo", // Usually your repo name.
 
@@ -67,6 +65,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
+        hideOnScroll: false,
         title: "MTI - Institución",
         logo: {
           alt: "Logo Liceo",
@@ -127,6 +126,12 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
       },
+      docs: {
+      sidebar: {
+        hideable: true,  // ⬅️ PERMITE OCULTAR LA SIDEBAR
+        autoCollapseCategories: true, // ⬅️ CATEGORÍAS COLAPSABLES
+      },
+    },
     }),
 };
 
