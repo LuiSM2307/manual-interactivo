@@ -1,6 +1,8 @@
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #1e40af;
+  /* RGB counterpart used by rgba(var(--ifm-color-primary-rgb), <alpha>) */
+  --ifm-color-primary-rgb: 30, 64, 175;
   --ifm-color-primary-dark: #1b3ca0;
   --ifm-color-primary-darker: #193896;
   --ifm-color-primary-darkest: #152c7c;
@@ -15,6 +17,8 @@
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
   --ifm-color-primary: #60a5fa; /* Azul más suave para modo oscuro */
+  /* RGB counterpart for dark theme */
+  --ifm-color-primary-rgb: 96, 165, 250;
   --ifm-color-primary-dark: #4a95f9;
   --ifm-color-primary-darker: #3d8df8;
   --ifm-color-primary-darkest: #1b76f7;
@@ -157,4 +161,567 @@
 [data-theme="dark"] .menu__link.menu__link--sublist.menu__link--active,
 [data-theme="dark"] .menu__link.menu__link--sublist.menu__link--active > span {
   color: white !important;
+}
+
+/* Grid de aprendizaje - 2x2 perfecto */
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.learning-card {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Efecto de borde animado */
+.learning-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-light)
+  );
+  transition: left 0.5s ease;
+}
+
+[data-theme="dark"] .learning-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.learning-card:hover::before {
+  left: 0;
+}
+
+[data-theme="dark"] .learning-card:hover::before {
+  left: 100%;
+}
+
+.learning-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Modo oscuro mejorado para tarjetas */
+[data-theme="dark"] .learning-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .learning-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.learning-card h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--ifm-color-primary);
+  font-size: 1.2rem;
+}
+
+.learning-card p {
+  margin: 0;
+  color: var(--ifm-font-color-base);
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .learning-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  .learning-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Botones mejorados */
+.button--lg {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de pulso suave */
+@keyframes gentlePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.button--primary:hover {
+  animation: none;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de brillo al hacer hover */
+.button--primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.button--primary:hover::before {
+  left: 100%;
+}
+
+/* Botón secundario mejorado */
+.button--secondary {
+  border: 2px solid var(--ifm-color-primary);
+  background: transparent;
+  color: var(--ifm-color-primary);
+  transition: all 0.3s ease;
+}
+
+.button--secondary:hover {
+  background: var(--ifm-color-primary);
+  transform: translateY(-2px);
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .button--secondary:hover {
+  color: black !important;
+}
+
+.button--compact {
+  font-size: 18px;
+  padding-bottom: 0cap;
+  border-radius: 6px;
+  /* asegurar que sobrescriba reglas menos específicas */
+  transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.button--primary.button--compact {
+  animation: gentlePulse 2s infinite;
+}
+
+/* Si quieres que el botón primario compacto tenga menos sombra/efecto */
+.button--primary.button--compact:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Botón secundario compacto: borde fino y hover sutil */
+.button--secondary.button--compact {
+  border-width: 1px !important;
+}
+.button--secondary.button--compact:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+}
+
+/* Animaciones para el tooltip del glosario */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para los términos del glosario */
+.glossary-term {
+  transition: all 0.2s ease;
+}
+
+.glossary-term:hover {
+  color: var(--ifm-color-primary-dark) !important;
+  text-decoration-color: var(--ifm-color-primary-dark) !important;
+}
+
+/* Estilos mejorados para el tooltip del glosario */
+.glossary-tooltip {
+  background: var(--ifm-background-surface-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(10px);
+  z-index: 10001 !important; /* Muy alto para estar por encima de todo */
+}
+
+/* Dark mode: keep original subtle look (no override) */
+[data-theme="dark"] .collapseSidebarButtonCustom {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Asegurar que el texto sea legible */
+.glossary-tooltip * {
+  color: var(--ifm-font-color-base) !important;
+  z-index: 10002 !important;
+  position: relative;
+}
+
+/* Fondo sólido para el contenido */
+.glossary-tooltip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  z-index: 10000;
+}
+
+/* Mejorar la legibilidad del texto */
+.glossary-tooltip p,
+.glossary-tooltip strong,
+.glossary-tooltip span {
+  position: relative;
+  z-index: 10003 !important;
+}
+
+/* Flecha del tooltip */
+.glossary-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--ifm-background-surface-color);
+  z-index: 10001;
+}
+
+/* Cuando el tooltip está arriba */
+.glossary-tooltip.top::after {
+  bottom: auto;
+  top: -8px;
+  border-top: none;
+  border-bottom: 8px solid var(--ifm-background-surface-color);
+}
+
+/* Mejorar la transición del tooltip */
+.glossary-tooltip {
+  animation: glossaryFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-origin: center bottom;
+}
+
+.glossary-tooltip.top {
+  transform-origin: center top;
+}
+
+@keyframes glossaryFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Asegurar que el tooltip esté por encima de todo */
+:root {
+  --glossary-z-index: 10001;
+}
+
+.glossary-tooltip {
+  z-index: var(--glossary-z-index) !important;
+}
+
+/* En modo oscuro, mejorar el contraste */
+[data-theme="dark"] .glossary-tooltip {
+  border-color: var(--ifm-color-emphasis-400) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="dark"] .glossary-tooltip::before {
+  background: var(--ifm-background-surface-color) !important;
+}
+
+/* Botones específicos del manual - SIN afectar globales */
+.manual-btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.manual-btn--primary {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.manual-btn--secondary {
+  background: transparent;
+  color: var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.manual-btn--lg {
+  padding: 0.875rem 2rem;
+  font-size: 1.1rem;
+}
+
+.manual-btn--compact {
+  padding: 0.625rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Hover effects específicos */
+.manual-btn--primary:hover {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.manual-btn--secondary:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+/* Navbar mejorada con efecto glassmorphism */
+.navbar {
+  backdrop-filter: blur(10px) saturate(180%);
+  background: rgba(var(--ifm-navbar-background-rgb), 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto de profundidad cuando se hace scroll */
+.navbar--scrolled {
+  background: rgba(var(--ifm-navbar-background-rgb), 0.95) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Ocultación suave al hacer scroll hacia abajo */
+.navbar--hide {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Revelación al hacer scroll hacia arriba */
+.navbar--show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Logo y marca mejorados */
+.navbar__brand {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.navbar__brand:hover {
+  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+  transform: scale(1.05);
+}
+
+.navbar__title {
+  font-weight: 700;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Items de navegación modernos */
+.navbar__link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  margin: 0 0.25rem;
+}
+
+.navbar__link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-light)
+  );
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar__link:hover::before {
+  width: 80%;
+}
+
+.navbar__link:hover {
+  background: rgba(var(--ifm-color-primary-rgb), 0.08);
+  transform: translateY(-1px);
+}
+
+.navbar__link--active {
+  background: rgba(var(--ifm-color-primary-rgb), 0.12) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+.navbar__link--active::before {
+  width: 80%;
+}
+
+/* Comportamiento básico de la navbar */
+.navbar {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease !important;
+  position: fixed !important;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar--hide {
+  transform: translateY(-100%) !important;
+  opacity: 0 !important;
+}
+
+.navbar--show {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}
+
+.navbar--scrolled {
+  background: rgba(var(--ifm-navbar-background-rgb), 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Ajustar el contenido principal */
+.main-wrapper {
+  padding-top: var(--ifm-navbar-height) !important;
+}
+
+/* Sidebar y TOC - posiciones fijas */
+.menu {
+  position: fixed !important;
+}
+
+.table-of-contents {
+  position: fixed !important;
+}
+
+/* Global custom styles for the DocSidebar collapse button (editable here) */
+.collapseSidebarButtonCustom {
+  /* base reset (keeps button look from Infima) */
+  display: none !important;
+}
+
+@media (min-width: 997px) {
+  .collapseSidebarButtonCustom {
+    display: block !important;
+    height: 44px;
+    position: absolute;
+    bottom: 60px;
+    left: 10%;
+    transform: translateX(-50%);
+    border-radius: 999px; /* pill */
+    border: 1px solid rgba(16, 24, 40, 0.06);
+    padding: 0 14px;
+    background: linear-gradient(
+      180deg,
+      rgba(66, 102, 255, 0.08),
+      rgba(66, 102, 255, 0.04)
+    );
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    color: var(--ifm-color-primary);
+    transition: background 0.18s ease, transform 0.12s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .collapseSidebarButtonCustom:hover,
+  .collapseSidebarButtonCustom:focus {
+    background: rgba(66, 102, 255, 0.12);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* icon inside the button */
+  .collapseSidebarButtonIcon {
+    margin-top: 3px;
+    transform: rotate(180deg);
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  [dir="rtl"] .collapseSidebarButtonIcon {
+    transform: rotate(0);
+  }
+}
+
+/* Ensure sidebar container is positioned so our absolute collapse button anchors inside it
+   We target common generated class prefixes used by the theme build (sidebar_ and docSidebarContainer_)
+   as well as the original class name `.sidebar` to be safe. This avoids using JS to set inline styles. */
+[class^="sidebar_"],
+[class*=" sidebar_"],
+[class^="docSidebarContainer_"],
+[class*=" docSidebarContainer_"],
+.sidebar {
+  position: relative;
 }

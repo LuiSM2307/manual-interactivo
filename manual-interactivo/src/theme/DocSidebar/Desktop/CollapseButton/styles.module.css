@@ -1,0 +1,10 @@
+:root {
+  --custom-collapse-bg: rgba(66, 102, 255, 0.06);
+  --custom-collapse-bg-hover: rgba(66, 102, 255, 0.12);
+}
+
+/* keep original behaviour but add our modern rounded pill */
+.collapseSidebarButton {
+  display: none;
+  margin: 0;
+}

@@ -4,18 +4,32 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem;
+  color: black;
   text-align: center;
   position: relative;
   overflow: hidden;
   background: linear-gradient(
-      rgba(46, 78, 182, 0.799), 
-      rgba(90, 128, 252, 0.83)
-    ),
-    url('/img/fondo-principal.jpg');
-  background-size: cover;
-  background-position: center;
-  color: white;
+    135deg,
+    var(--ifm-hero-background-color) 0%,
+    rgba(var(--ifm-color-primary-rgb), 0.1) 50%,
+    var(--ifm-hero-background-color) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  transform: translateZ(0);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .hero__title {
@@ -36,4 +50,124 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Homepage-only background (light mode): subtle, modern, helps CTA read */
+.main {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 50%, #f7f9fb 100%);
+  background-image: radial-gradient(
+      circle at 10% 10%,
+      rgba(66, 102, 255, 0.03) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(255, 119, 198, 0.02) 0%,
+      transparent 20%
+    ),
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 50%, #f7f9fb 100%);
+  /* stronger, modern background to highlight the CTA on light pages */
+  background-image:
+    /* soft centered halo (primary color) */ radial-gradient(
+      circle at 50% 40%,
+      rgba(var(--ifm-color-primary-rgb), 0.1) 0%,
+      rgba(var(--ifm-color-primary-rgb), 0.06) 18%,
+      transparent 40%
+    ),
+    /* subtle corner accents */
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(66, 102, 255, 0.06) 0%,
+        transparent 18%
+      ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(255, 119, 198, 0.04) 0%,
+      transparent 18%
+    ),
+    /* base paper gradient */
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #fbfdff 48%,
+        #eef6ff 72%,
+        #f7f9fb 100%
+      );
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 5.5rem;
+  /* small inward offset so halo peeks beyond the CTA */
+  padding-top: 1rem;
+  position: relative;
+  overflow: visible;
+}
+
+/* Keep dark mode unchanged for the homepage background */
+[data-theme="dark"] .main {
+  background: none;
+}
+
+/* Horizontal soft band behind the CTA to guide attention (light mode only) */
+.main::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  /* narrower, brighter spotlight band */
+  width: 80%;
+  max-width: 1000px;
+  height: 220px;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--ifm-color-primary-rgb), 0.22) 0%,
+    rgba(var(--ifm-color-primary-rgb), 0.14) 40%,
+    rgba(255, 255, 255, 0) 85%
+  );
+  /* sharper, brighter focus */
+  filter: blur(28px) saturate(140%);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .main::before {
+  display: none;
+}
+
+/* Efectos de partículas sutiles */
+.heroBanner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 119, 198, 0.1) 0%,
+      transparent 50%
+    );
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .heroBanner {
+  background: linear-gradient(
+    135deg,
+    #0f0f23 0%,
+    rgba(var(--ifm-color-primary-rgb), 0.15) 50%,
+    #0f0f23 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  transform: translateZ(0);
+  color: white;
 }

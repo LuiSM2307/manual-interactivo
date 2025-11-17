@@ -94,7 +94,7 @@ export default function HomepageFeatures() {
             <h2>¿A qué esperas?</h2>
               <p>Comienza a explorar nuestro manual interactivo ahora mismo</p>
               <Link
-                className="button button--primary button--lg"
+                className="button button--secondary button--lg"
                 to="/docs">
                 Comenzar Ahora 🚀
               </Link>

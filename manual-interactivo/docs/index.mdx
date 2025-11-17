@@ -1,0 +1,103 @@
+---
+sidebar_label: "🏠 Inicio"
+---
+
+import React from "react";
+import Link from "@docusaurus/Link";
+import ProgressIndicator from "@site/src/components/ProgressIndicator";
+import GlossaryTerm from '@site/src/components/GlossaryTerm';
+
+# _Manual Técnico Interactivo_
+
+<div style={{ textAlign: "left", marginBottom: "2rem" }}>
+  <p style={{ fontSize: "1.2rem", opacity: 0.8 }}>
+    Bienvenido al manual de mantenimiento... 😊​🖐️​
+  </p>
+</div>
+
+<div style={{ textAlign: "center", marginBottom: "2rem" }}>
+  <p style={{ fontSize: "1.2rem" }}>
+   ## 🎯 ¿Qué aprenderás?
+   </p>
+</div>
+
+<div className="learning-grid">
+  <div className="learning-card">
+    <h3>💡 Conceptos Técnicos</h3>
+    <p>
+      Conocer conceptos básicos y avanzados sobre computadoras, hardware y
+      software de forma clara y práctica.
+    </p>
+  </div>
+  <div className="learning-card">
+    <h3>🔧 Mantenimiento Hardware</h3>
+    <p>
+      Aprender a realizar limpieza, mantenimiento preventivo y cuidados básicos
+      de los componentes físicos.
+    </p>
+  </div>
+  <div className="learning-card">
+    <h3>🛡️ Mantenimiento Software</h3>
+    <p>
+      Resolver problemas del sistema, optimizar rendimiento y realizar
+      mantenimientos correctivos eficaces.
+    </p>
+  </div>
+  <div className="learning-card">
+    <h3>🔍 Detección de Errores</h3>
+    <p>
+      Identificar, diagnosticar y solucionar fallos comunes con técnicas
+      profesionales y herramientas adecuadas.
+    </p>
+  </div>
+</div>
+
+{/* Componente de progreso */}
+
+<ProgressIndicator />
+
+{/* Botones de acción principales */}
+
+<div
+  style={{
+    display: "flex",
+    gap: "1rem",
+    justifyContent: "center",
+    margin: "2.5rem 0",
+    flexWrap: "wrap",
+  }}
+>
+  <Link
+    className="button button--primary button--lg button--compact"
+    to="/docs/guia-rapida"
+  >
+    🚀 Comenzar con Guía Rápida
+  </Link>
+  <Link
+    className="button button--secondary button--lg button--compact"
+    to="/docs/conceptos-basicos"
+  >
+    📚 Empezar desde Cero
+  </Link>
+</div>
+
+## 📖 Sobre el Manual
+
+La tecnología se ha convertido en un **pilar fundamental** para el desarrollo de procesos de enseñanza y aprendizaje. La Unidad Educativa Nacional **"Vicente Emilio Sojo"**, tomando como rol la transformación pedagógica, reconoce la importancia de mantener su infraestructura tecnológica en óptimas condiciones para garantizar su correcto funcionamiento y aprovechamiento.
+
+Este **manual técnico interactivo** surge como una herramienta diseñada para empoderar a docentes, estudiantes y personal administrativo en el cuidado básico de los equipos informáticos.
+
+## ✨ Características Únicas
+
+- **Aprendizaje Interactivo**: Conceptos que cobran vida con ejemplos prácticos
+- **Guías Paso a Paso**: Procedimientos detallados con imágenes y explicaciones claras
+- **Glosario Integrado**: Términos técnicos explicados al instante, solo pasa el cursor por un <GlossaryTerm term="termino">Término</GlossaryTerm>  y veras la definición.
+- **Enfoque Práctico**: Soluciones reales para problemas comunes
+
+---
+
+_Última actualización: {new Date().toLocaleDateString('es-ES', {
+year: 'numeric',
+month: 'long',
+day: 'numeric'
+})}_

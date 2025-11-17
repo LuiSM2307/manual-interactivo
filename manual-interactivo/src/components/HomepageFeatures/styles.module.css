@@ -12,36 +12,25 @@
 
 .specialFeature {
   text-align: center;
+  transform: translateZ(0);
   color: white;
   padding: 3rem 2rem;
   border-radius: 12px;
   background: linear-gradient(
-      rgba(46, 78, 182, 0.799), 
-      rgba(90, 128, 252, 0.83)
+      rgba(61, 98, 219, 0.603),
+      rgba(65, 99, 211, 0.897)
     ),
-    url('/img/fondo-secundario.jpg');
-  background-size:cover;
-  background-position:right;;
+    url("/img/fondo-principal.jpg");
+  background-size: cover;
+  background-position: right;
   border: 1px solid var(--ifm-color-emphasis-300);
 }
 
-[data-theme='dark'] .specialFeature {
-    background: linear-gradient(
-      rgba(82, 117, 233, 0.908), 
-      rgba(65, 99, 211, 0.732)
-    ),
-    url('/img/fondo-secundario.jpg');
-  background-size:cover;
-  background-position:right;;
-}
-
-.ctaSection {
-  text-align: center;
-  padding: 4rem 0;
-  margin-top: 3rem;
-  border-radius: 12px;
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
+[data-theme="dark"] .specialFeature {
+  background: linear-gradient(rgba(64, 104, 236, 0.695), rgb(65, 99, 211)),
+    url("/img/fondo-principal.jpg");
+  background-size: cover;
+  background-position: right;
 }
 
 .specialEmoji {
@@ -63,7 +52,129 @@
   margin: 0 auto;
 }
 
-.ctaSection h2 {
-  color: var(--ifm-color-primary);
+
+
+/* Glass CTA (improved): stronger contrast, center, accent and accessible CTA */
+.ctaSection {
+  position: relative;
+  max-width: 980px;
+  margin: 3rem auto 0;
+  padding: 2.5rem 1.5rem;
+  border-radius: 14px;
+  /* off-white gradient so the card reads clearly on white pages */
+  background: linear-gradient(
+    180deg,
+    rgba(250, 250, 252, 0.98),
+    rgba(244, 246, 248, 0.98)
+  );
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  /* stronger shadow on light mode so the card separates from page */
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.12),
+    0 6px 12px rgba(15, 23, 42, 0.04) inset;
+  z-index: 1;
+  backdrop-filter: blur(8px) saturate(120%);
+  color: rgba(17, 24, 39, 0.95);
+  text-align: center;
 }
 
+[data-theme="dark"] .ctaSection {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 10, 18, 0.36),
+    rgba(8, 10, 18, 0.28)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ctaSection::before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: -24px;
+  width: 120px;
+  height: 120px;
+  /* lighter accent in light mode so it doesn't look harsh */
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(var(--ifm-color-primary-rgb), 0.06),
+    transparent 40%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0.95;
+}
+
+/* Soft spotlight behind the CTA to guide the eye (light mode only) */
+.ctaSection::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -20%);
+  width: 680px;
+  height: 320px;
+  background: radial-gradient(
+    closest-side,
+    rgba(var(--ifm-color-primary-rgb), 0.06),
+    rgba(255, 255, 255, 0) 60%
+  );
+  filter: blur(48px) saturate(120%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ctaSection h2 {
+  font-size: 1.6rem;
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+  color: inherit;
+}
+.ctaSection p {
+  color: inherit;
+  opacity: 0.95;
+  max-width: 820px;
+  margin: 0 auto 1rem;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--ifm-color-primary-rgb), 1),
+    rgba(var(--ifm-color-primary-rgb), 0.88)
+  );
+  color: #fff;
+  border: none;
+  padding: 0.72rem 1.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 8px 22px rgba(var(--ifm-color-primary-rgb), 0.18);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.12s ease;
+}
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(var(--ifm-color-primary-rgb), 0.22);
+  opacity: 0.98;
+}
+.ctaButton:focus {
+  outline: 3px solid rgba(var(--ifm-color-primary-rgb), 0.18);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .ctaSection {
+    padding: 1.75rem 1rem;
+    border-radius: 12px;
+  }
+  .ctaSection h2 {
+    font-size: 1.35rem;
+  }
+  .ctaButton {
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+    max-width: 360px;
+  }
+}

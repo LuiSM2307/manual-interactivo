@@ -14,6 +14,7 @@ import Navbar from "@theme/Navbar";
 import Footer from "@theme/Footer";
 import LayoutProvider from "@theme/Layout/Provider";
 import ErrorPageContent from "@theme/ErrorPageContent";
+import NavbarBehavior from '@site/src/components/NavbarBehavior';
 import styles from "./styles.module.css";
 
 export default function Layout(props) {
@@ -36,6 +37,8 @@ export default function Layout(props) {
 
       <Navbar />
 
+      <NavbarBehavior />
+      
       <div
         id={SkipToContentFallbackId}
         className={clsx(
