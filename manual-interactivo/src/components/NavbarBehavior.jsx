@@ -66,27 +66,45 @@ export default function NavbarBehavior() {
         element.style.willChange = "transform";
 
         if (selector === ".collapseSidebarButtonCustom") {
-          // Align the collapse button to sit visually at the bottom-center of the .menu
-          if (menuRect) {
-            element.style.position = "fixed";
-            // center horizontally over the menu
-            element.style.left = `${menuRect.left + menuRect.width / 2}px`;
-            // place vertically at the bottom of the menu (viewport coordinates)
-            // subtract a small offset so it sits just inside the sidebar area
-            const btnHeight = element.offsetHeight || 44;
-            const offset = 12; // px above the bottom edge
-            const desiredTop =
-              menuRect.top + menuRect.height - btnHeight - offset;
-            element.style.top = `${Math.max(desiredTop, 8)}px`;
-            // only keep horizontal centering transform
-            element.style.transform = "translateX(-50%)";
-            element.style.zIndex = "1000";
+          const menuEl = document.querySelector(".menu");
+          if (menuEl) {
+            // Anchor the button inside the .menu container so it naturally
+            // follows the menu's transform/animation without manual compensation.
+            try {
+              if (!menuEl.contains(element)) {
+                menuEl.appendChild(element);
+              }
+              element.style.position = "absolute";
+              element.style.left = "50%";
+              element.style.transform = "translateX(-50%)";
+              // place a few pixels above the bottom of the menu
+              const offsetFromBottom = 12; // adjust to preference
+              element.style.bottom = `${offsetFromBottom}px`;
+              element.style.top = "auto";
+              element.style.zIndex = "999";
+            } catch (err) {
+              // If append fails (rare), fallback to fixed+translate (synchronized)
+              const rect = menuEl.getBoundingClientRect();
+              element.style.position = "fixed";
+              element.style.left = `${rect.left + rect.width / 2}px`;
+              const verticalTranslate = isVisible ? navbarHeight : 0;
+              element.style.top = `${Math.max(
+                rect.top +
+                  rect.height -
+                  (element.offsetHeight || 44) -
+                  8 -
+                  verticalTranslate,
+                8
+              )}px`;
+              element.style.transform = `translateX(-50%) translateY(${verticalTranslate}px)`;
+              element.style.zIndex = "1000";
+            }
           } else {
-            // fallback: visual translate like other elements
+            // fallback: apply same translate behaviour as other elements
             if (isVisible) {
-              element.style.transform = `translateY(${navbarHeight}px)`;
+              element.style.transform = `translateX(-50%) translateY(${navbarHeight}px)`;
             } else {
-              element.style.transform = "translateY(0)";
+              element.style.transform = `translateX(-50%) translateY(0)`;
             }
           }
         } else {

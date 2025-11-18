@@ -9,6 +9,8 @@
   --ifm-color-primary-light: #2144be;
   --ifm-color-primary-lighter: #2348c8;
   --ifm-color-primary-lightest: #2d55d2;
+  /* Fallback para el background de la navbar (RGB) */
+  --ifm-navbar-background-rgb: 255, 255, 255;
   --ifm-code-font-size: 95%;
   --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
@@ -341,7 +343,7 @@
 
 .button--compact {
   font-size: 18px;
-  padding-bottom: 0cap;
+  padding-bottom: 0;
   border-radius: 6px;
   /* asegurar que sobrescriba reglas menos específicas */
   transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -542,16 +544,31 @@
 /* Navbar mejorada con efecto glassmorphism */
 .navbar {
   backdrop-filter: blur(10px) saturate(180%);
-  background: rgba(var(--ifm-navbar-background-rgb), 0.8) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* Start transparent so the page content shows through; when user
+     scrolls we apply the glass background in .navbar--scrolled. */
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Efecto de profundidad cuando se hace scroll */
-.navbar--scrolled {
-  background: rgba(var(--ifm-navbar-background-rgb), 0.95) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border-bottom-color: rgba(255, 255, 255, 0.15);
+/* Theme-aware scrolled navbar: light theme -> light translucent glass;
+   dark theme -> dark translucent glass. This avoids flashing an unintended
+   color when the user scrolls. */
+[data-theme="dark"] .navbar--scrolled {
+  background: rgba(11, 18, 32, 0.88) !important;
+  box-shadow: 0 6px 24px rgba(2, 6, 23, 0.35);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+/* Default / light theme */
+:root .navbar--scrolled,
+[data-theme="light"] .navbar--scrolled {
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(10px);
 }
 
 /* Ocultación suave al hacer scroll hacia abajo */
@@ -648,9 +665,12 @@
 }
 
 .navbar--scrolled {
-  background: rgba(var(--ifm-navbar-background-rgb), 0.95) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* Neutral fallback WITHOUT !important so theme-specific selectors
+     ([data-theme]) with !important will take precedence. Keep it
+     subtle/transparent to avoid forcing white in dark mode. */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 /* Ajustar el contenido principal */
@@ -658,70 +678,231 @@
   padding-top: var(--ifm-navbar-height) !important;
 }
 
-/* Sidebar y TOC - posiciones fijas */
+/* Sidebar y TOC - posiciones fijas (fixed but styled to behave like static)
+   We keep `position: fixed` for layout stability, but set left/width so the
+   sidebar fills the expected horizontal space and move vertical scrolling
+   to the inner list to avoid clipping when sections expand. */
 .menu {
   position: fixed !important;
+  top: var(--ifm-navbar-height);
+  left: 0;
+  width: var(--ifm-sidebar-width, 300px);
+  right: auto;
+  max-height: calc(100vh - var(--ifm-navbar-height));
+  overflow: visible; /* allow anchored buttons to be visible outside inner scroller */
+  padding-bottom: 60px; /* reserve space for anchored controls */
+  box-sizing: border-box;
 }
 
 .table-of-contents {
   position: fixed !important;
 }
 
-/* Global custom styles for the DocSidebar collapse button (editable here) */
-.collapseSidebarButtonCustom {
-  /* base reset (keeps button look from Infima) */
-  display: none !important;
+/* Final overrides: ensure theme-specific scrolled navbar wins even if
+   other styles are loaded later. These selectors are intentionally specific
+   and use !important to prevent accidental overrides. */
+html[data-theme="dark"] .navbar.navbar--scrolled,
+[data-theme="dark"] html .navbar.navbar--scrolled,
+[data-theme="dark"] .navbar.navbar--scrolled {
+  background: rgba(11, 18, 32, 0.92) !important;
+  box-shadow: 0 6px 30px rgba(2, 6, 23, 0.45) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
 }
+
+html:not([data-theme="dark"]) .navbar.navbar--scrolled,
+:root[data-theme="light"] .navbar.navbar--scrolled,
+[data-theme="light"] .navbar.navbar--scrolled {
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* =========================================================
+   BOTÓN FLOTANTE SUPER ESTILIZADO – VERSIÓN FINAL
+   ========================================================= */
 
 @media (min-width: 997px) {
-  .collapseSidebarButtonCustom {
-    display: block !important;
-    height: 44px;
-    position: absolute;
-    bottom: 60px;
-    left: 10%;
-    transform: translateX(-50%);
-    border-radius: 999px; /* pill */
-    border: 1px solid rgba(16, 24, 40, 0.06);
-    padding: 0 14px;
+  /* === BOTÓN BASE === */
+  button[class*="collapseSidebarButton"] {
+    width: 58px;
+    height: 40px;
+
+    position: fixed !important;
+    bottom: 32px;
+    left: calc(var(--doc-sidebar-width) / 2 - 29px);
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    padding: 0;
+    z-index: 200;
+    position: fixed;
+
+    /* Base vidrio/glass */
     background: linear-gradient(
-      180deg,
-      rgba(66, 102, 255, 0.08),
-      rgba(66, 102, 255, 0.04)
+      145deg,
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0.1)
     );
-    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
-    color: var(--ifm-color-primary);
-    transition: background 0.18s ease, transform 0.12s ease,
-      box-shadow 0.18s ease;
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+    --shadowX: 0px;
+    --shadowY: 0px;
+
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.25, 1.4),
+      background 0.22s ease, box-shadow 0.25s ease,
+      border-radius 0.28s cubic-bezier(0.28, 1.4, 0.32, 1.2);
   }
 
-  .collapseSidebarButtonCustom:hover,
-  .collapseSidebarButtonCustom:focus {
-    background: rgba(66, 102, 255, 0.12);
-    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
-    transform: translateY(-2px);
+  /* Quitar icono original */
+  button[class*="collapseSidebarButton"] svg {
+    display: none !important;
   }
 
-  /* icon inside the button */
-  .collapseSidebarButtonIcon {
-    margin-top: 3px;
+  /* === CHEVRON NUEVO === */
+  button[class*="collapseSidebarButton"]::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14.7 6.3a1 1 0 0 0-1.4 0L8.3 11.3a1 1 0 0 0 0 1.4l5 5a1 1 0 1 0 1.4-1.4L10.4 12l4.3-4.3a1 1 0 0 0 0-1.4z'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14.7 6.3a1 1 0 0 0-1.4 0L8.3 11.3a1 1 0 0 0 0 1.4l5 5a1 1 0 1 0 1.4-1.4L10.4 12l4.3-4.3a1 1 0 0 0 0-1.4z'/></svg>");
+
+    mask-size: cover;
+    -webkit-mask-size: cover;
+
+    background-color: var(--ifm-color-primary);
+    transition: transform 0.22s ease, background-color 0.22s ease,
+      filter 0.25s ease;
+  }
+
+  /* Girar + micro wiggle */
+  button[class*="collapseSidebarButton"][aria-pressed="true"]::before {
     transform: rotate(180deg);
-    display: inline-block;
-    vertical-align: middle;
+    animation: microWiggle 0.33s ease-out;
   }
 
-  [dir="rtl"] .collapseSidebarButtonIcon {
-    transform: rotate(0);
+  @keyframes microWiggle {
+    0% {
+      transform: rotate(180deg) scale(1);
+    }
+    30% {
+      transform: rotate(185deg) scale(1.12);
+    }
+    60% {
+      transform: rotate(178deg) scale(0.96);
+    }
+    100% {
+      transform: rotate(180deg) scale(1);
+    }
   }
-}
 
-/* Ensure sidebar container is positioned so our absolute collapse button anchors inside it
-   We target common generated class prefixes used by the theme build (sidebar_ and docSidebarContainer_)
-   as well as the original class name `.sidebar` to be safe. This avoids using JS to set inline styles. */
-[class^="sidebar_"],
-[class*=" sidebar_"],
-[class^="docSidebarContainer_"],
-[class*=" docSidebarContainer_"],
-.sidebar {
-  position: relative;
+  /* === ICONO – COLOR CORRECTO SEGÚN MODO === */
+  html:not([data-theme="dark"]) button[class*="collapseSidebarButton"]::before {
+    background-color: var(--ifm-color-primary);
+  }
+
+  html:not([data-theme="dark"])
+    button[class*="collapseSidebarButton"]:hover::before {
+    background-color: #000;
+  }
+
+  [data-theme="dark"] button[class*="collapseSidebarButton"]::before {
+    background-color: var(--ifm-color-primary);
+  }
+
+  [data-theme="dark"] button[class*="collapseSidebarButton"]:hover::before {
+    background-color: #fff;
+  }
+
+  /* =====================================================
+     HOVER: REBOTE + MORPHING + SPOTLIGHT + DEGRADADO
+     ===================================================== */
+
+  button[class*="collapseSidebarButton"]:hover {
+    transform: translateY(-6px) scale(1.06);
+    border-radius: 18px;
+
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.23)
+    );
+
+    box-shadow: calc(var(--shadowX) * 0.25) calc(var(--shadowY) * 0.25) 28px
+        rgba(0, 0, 0, 0.35),
+      0 0 18px rgba(255, 255, 255, 0.35);
+  }
+
+  [data-theme="dark"] button[class*="collapseSidebarButton"]:hover {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0.06)
+    );
+  }
+
+  /* =====================================================
+     PULSO ANIMADO (EFECTO GLOW)
+     ===================================================== */
+
+  button[class*="collapseSidebarButton"]::after {
+    content: "";
+    position: absolute;
+    width: 58px;
+    height: 40px;
+    border-radius: inherit;
+
+    background: radial-gradient(rgba(255, 255, 255, 0.25), transparent 70%);
+
+    opacity: 0;
+    pointer-events: none;
+
+    animation: pulseGlow 2.4s infinite ease-in-out;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  button[class*="collapseSidebarButton"]:hover::after {
+    opacity: 0.45;
+    transform: scale(1.25);
+  }
+
+  @keyframes pulseGlow {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(1.15);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+
+  /* =====================================================
+     MODO OSCURO – AJUSTES BASE
+     ===================================================== */
+
+  [data-theme="dark"] button[class*="collapseSidebarButton"] {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.04)
+    );
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="dark"] button[class*="collapseSidebarButton"]::after {
+    background: radial-gradient(rgba(255, 255, 255, 0.25), transparent 70%);
+  }
 }
