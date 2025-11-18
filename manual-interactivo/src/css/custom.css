@@ -906,3 +906,258 @@ html:not([data-theme="dark"]) .navbar.navbar--scrolled,
     background: radial-gradient(rgba(255, 255, 255, 0.25), transparent 70%);
   }
 }
+
+/* Guía Rápida - Estilos Específicos */
+
+/* Grid de emergencia */
+/* === 1. Estilos del Contenedor (Igual que antes) === */
+.emergency-grid {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; /* Centra las líneas, incluyendo la última */
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* === 2. Estilos de los Hijos === */
+.emergency-grid > * {
+  /* Define el tamaño base y permite que crezca (para los dos primeros) */
+  flex-basis: 350px; 
+  flex-grow: 1;      
+  /* Limitamos el crecimiento para que no sea excesivo en pantallas muy grandes */
+  max-width: 50%;
+}
+
+/* === 3. ¡LA CLAVE! ESTILO DEL ÚLTIMO HIJO === */
+/* Esta regla se aplica al último elemento de la cuadrícula */
+.emergency-grid > :last-child:nth-child(odd):nth-child(-n + 2n) {
+  /* Anulamos el crecimiento para que solo mantenga su tamaño base de 350px */
+  flex-grow: 0;
+}
+
+/* Tarjetas de emergencia */
+.emergency-card {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-left: 4px solid;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.emergency-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.emergency-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.emergency-card-header h4 {
+  margin: 0;
+  color: var(--ifm-color-primary);
+}
+
+.severity-badge {
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+/* Checklists */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checklist-item {
+  margin-bottom: 0.5rem;
+}
+
+.checklist-label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  gap: 0.75rem;
+}
+
+.checklist-input {
+  margin-top: 0.25rem;
+}
+
+.checklist-text {
+  flex: 1;
+  transition: all 0.3s ease;
+}
+
+.checklist-text.checked {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Horario de mantenimiento */
+.maintenance-schedule {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.schedule-category {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.schedule-category h3 {
+  margin: 0 0 1rem 0;
+  color: var(--ifm-color-primary);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--ifm-color-primary);
+  transition: width 0.3s ease;
+}
+
+/* Tabla de códigos de pitidos */
+.beep-codes-table {
+  /* Mantenemos el margen y el overflow */
+  margin: 2rem 0;
+  overflow-x: auto;
+  
+  /* IMPORTANTE: Centramos el contenido dentro de este contenedor */
+  text-align: center;
+}
+
+.beep-codes-table table {
+  /* 1. ELIMINAMOS O LIMITAMOS el 100% del ancho */
+  /* Auto permite que la tabla use el ancho mínimo necesario para su contenido */
+  width: auto; 
+  /* Puedes añadir un ancho máximo para que no se extienda demasiado en pantallas grandes */
+  max-width: 502px; 
+  
+  /* Mantenemos tus estilos visuales */
+  border-collapse: collapse;
+  background: var(--ifm-card-background-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.beep-codes-table th {
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 1rem;
+  text-align: left;
+}
+
+.beep-codes-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.beep-codes-table tr:last-child td {
+  border-bottom: none;
+}
+
+.beep-codes-table tr:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* Contactos de emergencia */
+.emergency-contacts {
+  margin: 2rem 0;
+}
+
+.contact-card {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-card h3 {
+  margin: 0 0 1rem 0;
+  color: var(--ifm-color-primary);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.contact-icon {
+  font-size: 1.2rem;
+}
+
+.resources-section h4 {
+  margin: 0 0 1rem 0;
+  color: var(--ifm-color-primary);
+}
+
+.resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.resource-link {
+  background: var(--ifm-color-emphasis-100);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.resource-link:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .emergency-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .maintenance-schedule {
+    grid-template-columns: 1fr;
+  }
+  
+  .resource-links {
+    flex-direction: column;
+  }
+  
+  .beep-codes-table {
+    font-size: 0.875rem;
+  }
+}

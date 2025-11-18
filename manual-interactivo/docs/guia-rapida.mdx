@@ -1,0 +1,105 @@
+---
+sidebar_label: '🚨 Guía Rápida'
+---
+
+import React, { useState } from 'react';
+import Link from '@docusaurus/Link';
+import EmergencyCard from '@site/src/components/EmergencyCard';
+import Checklist from '@site/src/components/Checklist';
+import MaintenanceSchedule from '@site/src/components/MaintenanceSchedule';
+import BeepCodesTable from '@site/src/components/BeepCodesTable';
+import EmergencyContacts from '@site/src/components/EmergencyContacts';
+
+# 🚨 Guía Rápida de Emergencia
+
+Una referencia rápida para resolver problemas comunes de hardware y software, realizar mantenimientos básicos y acceder a contactos de emergencia.
+
+## ⚡ Soluciones Inmediatas a Problemas Comunes
+
+Aqui encontrarás soluciones rápidas para los problemas más frecuentes que puedes enfrentar con tu computadora.
+
+
+<div style={{ textAlign: "center", marginBottom: "2rem" }}>
+  <p style={{ fontSize: "1.2rem" }}>
+   ### 🖥️ Problemas de Hardware
+   </p>
+</div>
+
+<div className="emergency-grid">
+
+<EmergencyCard title="Computadora no enciende" severity="critical">
+  <Checklist>
+    <Checklist.Item>Verificar cable de poder y conexiones</Checklist.Item>
+    <Checklist.Item>Revisar interruptor de fuente</Checklist.Item>
+    <Checklist.Item>Probar otro tomacorriente</Checklist.Item>
+  </Checklist>
+</EmergencyCard>
+
+<EmergencyCard title="No hay imagen en monitor" severity="high">
+  <Checklist>
+    <Checklist.Item>Verificar cables VGA/HDMI</Checklist.Item>
+    <Checklist.Item>Probar con otro monitor</Checklist.Item>
+    <Checklist.Item>Revisar tarjeta gráfica</Checklist.Item>
+  </Checklist>
+</EmergencyCard>
+
+<EmergencyCard title="Sobrecalentamiento" severity="medium">
+  <Checklist>
+    <Checklist.Item>Limpiar ventiladores</Checklist.Item>
+    <Checklist.Item>Verificar pasta térmica CPU</Checklist.Item>
+    <Checklist.Item>Mejorar ventilación</Checklist.Item>
+  </Checklist>
+</EmergencyCard>
+
+</div>
+
+<div style={{ textAlign: "center", marginBottom: "2rem" }}>
+  <p style={{ fontSize: "1.2rem" }}>
+   ### 💻 Problemas de Software
+   </p>
+</div>
+
+<div className="emergency-grid">
+  <EmergencyCard title="Pantalla azul (BSoD)" severity="critical">
+    <Checklist>
+      <Checklist.Item>Anotar código de error</Checklist.Item>
+      <Checklist.Item>Reiniciar en modo seguro</Checklist.Item>
+      <Checklist.Item>Restaurar sistema</Checklist.Item>
+    </Checklist>
+  </EmergencyCard>
+
+  <EmergencyCard title="Virus/Malware" severity="critical">
+    <Checklist>
+      <Checklist.Item>Desconectar internet</Checklist.Item>
+      <Checklist.Item>Ejecutar escaneo completo</Checklist.Item>
+      <Checklist.Item>Usar modo seguro</Checklist.Item>
+    </Checklist>
+  </EmergencyCard>
+
+  <EmergencyCard title="Computadora muy lenta" severity="high">
+    <Checklist>
+      <Checklist.Item>Liberar espacio en disco (≥15% libre)</Checklist.Item>
+      <Checklist.Item>Cerrar programas innecesarios</Checklist.Item>
+      <Checklist.Item>Ejecutar limpieza temporal</Checklist.Item>
+    </Checklist>
+  </EmergencyCard>
+</div>
+
+## 🛠️ Checklist de Mantenimiento Básico
+
+<MaintenanceSchedule />
+
+## 📋 Códigos de Pitidos - Emergencia
+
+<BeepCodesTable />
+
+## 📞 Contactos de Emergencia
+
+<EmergencyContacts />
+
+---
+
+**⚠️ ¿Problema no resuelto?** 
+Consulta la sección específica en el manual completo o contacta a soporte técnico.
+
+*Última actualización: {new Date().toLocaleDateString('es-ES')}*
